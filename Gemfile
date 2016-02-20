@@ -9,6 +9,8 @@ gem 'thin'
 gem 'jquery-rails'
 gem 'haml-rails'
 
+gem 'bcrypt'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
