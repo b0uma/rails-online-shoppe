@@ -9,6 +9,10 @@ RSpec.describe UsersController, type: :controller do
     {name: '', email: '', password: ''}
   end
 
+  let(:hacking_attempt) do
+    {name: '1337', email: 'h4cker@devbootcamp.com', password: 'lol', admin: true}
+  end
+
   describe "GET signup" do
     it "assigns a new product as @product" do
       get :new, {}
@@ -45,6 +49,11 @@ RSpec.describe UsersController, type: :controller do
       it "re-renders the 'new' template" do
         post :create, {:user => invalid_attributes}
         expect(response).to render_template("new")
+      end
+
+      it "does not let users set the admin field from the app" do
+        post :create, {:user => hacking_attempt}
+        expect(User.last.admin).to be(nil)
       end
     end
   end
