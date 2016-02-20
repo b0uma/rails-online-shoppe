@@ -18,7 +18,8 @@ describe "Product", js: true do
 
       it 'can create a new product when authorized' do
         page.driver.basic_authorize('admin', 'secret')
-        visit new_product_path
+        visit admin_path
+        click_link 'New Product'
         fill_in 'Name', with: name
         fill_in 'Description', with: description
         fill_in 'Price', with: price
