@@ -4,5 +4,6 @@
   %li.list-group-item= "Price: #{number_to_currency(@product.price)}"
   %li.list-group-item= "Description: #{@product.description}"
 
-= link_to 'Edit', edit_product_path(@product), { class: "btn btn-success" }
+- if current_user.admin
+  = link_to 'Edit', edit_product_path(@product), { class: "btn btn-success" }
 = link_to 'Back', products_path, { class: "btn btn-primary" }
