@@ -7,6 +7,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def authorize
-    head :unauthorized unless @current_user.admin
+    head :unauthorized unless current_user.admin
   end
 end
