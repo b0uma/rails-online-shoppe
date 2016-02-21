@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  def login(user)
+    session[:user_id] = user.id
+  end
+  helper_method :login
+
   def authorize
     head :unauthorized unless current_user.admin
   end
