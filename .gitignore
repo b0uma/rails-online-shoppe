@@ -4,4 +4,4 @@
 /log/*
 !/log/.keep
 /tmp
-.byebug-history
+.byebug_history
