@@ -6,11 +6,20 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Product.destroy_all
+Category.destroy_all
+
+Category.create(name: 'Food')
+Category.create(name: 'Electronics')
+Category.create(name: 'Home Appliances')
+Category.create(name: 'Fiction')
+Category.create(name: 'Workout')
 
 10.times do
-  Product.create(name: Faker::Commerce.product_name,
+  product = Product.create(name: Faker::Commerce.product_name,
                  description: Faker::Lorem.sentence(10),
                  price: Faker::Number.decimal(2),
-                 image_url: Faker::Avatar.image
-                 quantity: rand(1..5)
+                 image_url: Faker::Avatar.image,
+                 quantity: rand(1..5))
+  product.categories = Category.limit(2).order("RANDOM()")
+  product.save
 end
