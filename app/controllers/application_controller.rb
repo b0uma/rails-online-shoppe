@@ -12,6 +12,6 @@ class ApplicationController < ActionController::Base
   helper_method :login
 
   def authorize
-    head :unauthorized unless current_user.admin
+    render file: 'public/401.html', status: :unauthorized unless current_user.admin
   end
 end
