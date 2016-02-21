@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe "Product", js: true do
   let(:product) { Product.create({name: 'iPhone 3G', price: 399, description: 'Sturdy', image_url: 'https://upload.wikimedia.org/wikipedia/commons/0/0b/IPhone_3G_rear.jpg'}) }
+  let (:administrator) { User.create(name: 'lord', email: 'juicy', password: '666', admin: true) }
 
   context 'a user' do
     it 'can see the page title' do
@@ -17,7 +18,7 @@ describe "Product", js: true do
       let(:quantity) { 2 }
 
       it 'can create a new product when authorized' do
-        page.driver.basic_authorize('admin', 'secret')
+        page.set_rack_session(user_id: administrator.id)
         visit admin_path
         click_link 'New Product'
         fill_in 'Name', with: name

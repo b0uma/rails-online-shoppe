@@ -24,5 +24,6 @@ end
 group :test do
   gem 'capybara'
   gem 'poltergeist'
+  gem 'rack_session_access'
 end
 
