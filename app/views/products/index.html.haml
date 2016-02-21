@@ -1,6 +1,10 @@
 .container
   %h1 Listing products
   %h1 This page should be styled to be more user friendly instead of a tabular format
+  = form_tag "/products", method: :get do
+    = select_tag "category", options_from_collection_for_select(@categories, "id", "name", @selected_category.id)
+    = submit_tag "Filter by category"
+    = submit_tag "Reset"
   %table.table.table-bordered.table-striped.table-hover
     %thead
       %tr

@@ -3,8 +3,7 @@ class ProductsController < ApplicationController
   before_action :authorize, except: [:index, :show]
 
   def index
-    @products = Product.all
-    @categories = Category.all
+    prepare_products_and_categories
   end
 
   def show
@@ -43,10 +42,21 @@ class ProductsController < ApplicationController
   end
 
   def admin
-    @products = Product.all
+    prepare_products_and_categories
   end
 
   private
+
+  def prepare_products_and_categories
+    @categories = Category.all
+    if params[:commit] == "Reset" || params[:category].nil?
+      @selected_category = @categories.first
+      @products = Product.all
+    else
+      @selected_category = @categories.find_by(id: params[:category])
+      @products = @selected_category.products
+    end
+  end
 
   def set_product
     @product = Product.find(params[:id])
