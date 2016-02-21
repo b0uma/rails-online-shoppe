@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @categories = Category.all
   end
 
   def new
@@ -43,6 +44,14 @@ class ProductsController < ApplicationController
 
   def admin
     prepare_products_and_categories
+  end
+
+  def update_categories
+    product = Product.find(params[:product_id])
+    new_categories = Category.pluck(:name).select { |category| params[category] == "1" }
+    product.categories = Category.where(name: new_categories)
+    product.save
+    redirect_to product
   end
 
   private
