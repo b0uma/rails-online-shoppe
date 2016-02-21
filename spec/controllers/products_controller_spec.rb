@@ -12,26 +12,28 @@ RSpec.describe ProductsController, type: :controller do
 
   include AuthHelper
 
+
+  describe "GET #index" do
+    it "assigns all products as @products" do
+      product = Product.create!(valid_attributes)
+      get :index, {}
+      expect(assigns(:products)).to eq([product])
+    end
+  end
+
+  describe "GET #show" do
+    it "assigns the requested product as @product" do
+      product = Product.create!(valid_attributes)
+      get :show, {:id => product.to_param}
+      expect(assigns(:product)).to eq(product)
+    end
+  end
+
   context "for an admin user" do
-    before(:each) do
-      http_login
-    end
 
-    describe "GET #index" do
-      it "assigns all products as @products" do
-        product = Product.create!(valid_attributes)
-        get :index, {}
-        expect(assigns(:products)).to eq([product])
-      end
-    end
+    let (:administrator) { User.create(name: 'lord', email: 'juicy', password: '666', admin: true) }
 
-    describe "GET #show" do
-      it "assigns the requested product as @product" do
-        product = Product.create!(valid_attributes)
-        get :show, {:id => product.to_param}
-        expect(assigns(:product)).to eq(product)
-      end
-    end
+    before(:each) { session[:user_id] = administrator.id }
 
     describe "GET #new" do
       it "assigns a new product as @product" do
