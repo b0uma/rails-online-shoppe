@@ -6,6 +6,14 @@
 
 %h3 Categories
 %ul.list-group
+- if current_user && current_user.admin
+  = form_tag '/change_categories ', method: :post do
+    - @product.categories.each do |category|
+      %li.list-group-item
+        = check_box_tag category.name
+        = label_tag category.name
+    = submit_tag 'Change Categories'
+- else
   - @product.categories.each do |category|
     %li.list-group-item= category.name
 
