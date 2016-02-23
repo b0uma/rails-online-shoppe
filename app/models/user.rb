@@ -3,4 +3,16 @@ class User < ActiveRecord::Base
   validates :name, :email, :password_digest, presence: true
 
   has_many :orders
+
+  after_create :create_initial_order
+
+  def cart
+    orders.includes(order_items: [:product]).find_by(status: Order.statuses[:pending])
+  end
+
+  private
+
+  def create_initial_order
+    orders.create(status: Order.statuses[:pending]) if orders.blank?
+  end
 end

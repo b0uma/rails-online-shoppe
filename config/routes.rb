@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   post '/change_categories/:product_id', to: 'products#update_categories'
   get '/cart', to: 'orders#cart'
+  post '/cart', to: 'orders#add_to_cart'
 end

@@ -1,24 +1,25 @@
-%img{src: @product.image_url}
-%ul.list-group
-  %li.list-group-item= "Name: #{@product.name}"
-  %li.list-group-item= "Price: #{number_to_currency(@product.price)}"
-  %li.list-group-item= "Description: #{@product.description}"
-  %li.list-group-item= "Quantity: #{@product.quantity}"
+.container
+  %img{src: @product.image_url}
+  %ul.list-group
+    %li.list-group-item= "Name: #{@product.name}"
+    %li.list-group-item= "Price: #{number_to_currency(@product.price)}"
+    %li.list-group-item= "Description: #{@product.description}"
+    %li.list-group-item= "Quantity: #{@product.quantity}"
 
-%h3 Categories
-%ul.list-group
-- if current_user && current_user.admin
-  = form_tag "/change_categories/#{@product.id}", method: :post do
-    - @categories.each do |category|
-      %li.list-group-item
-        = check_box_tag category.name, "1", @product.categories.include?(category)
-        = label_tag category.name
-    = submit_tag 'Change Categories'
-- else
-  - @product.categories.each do |category|
-    %li.list-group-item= category.name
+  %h3 Categories
+  %ul.list-group
+  - if current_user && current_user.admin
+    = form_tag "/change_categories/#{@product.id}", method: :post do
+      - @categories.each do |category|
+        %li.list-group-item
+          = check_box_tag category.name, "1", @product.categories.include?(category)
+          = label_tag category.name
+      = submit_tag 'Change Categories'
+  - else
+    - @product.categories.each do |category|
+      %li.list-group-item= category.name
 
-- if current_user && current_user.admin
-  = link_to 'Edit', edit_product_path(@product), { class: "btn btn-success" }
-= link_to 'Back', products_path, { class: "btn btn-primary" }
-= link_to 'Add to Cart', cart_path, remote: true, class: "btn btn-success", disabled: @product.quantity == 0 || current_user.nil?
+  - if current_user && current_user.admin
+    = link_to 'Edit', edit_product_path(@product), { class: "btn btn-success" }
+  = link_to 'Back', products_path, { class: "btn btn-primary" }
+  = link_to 'Add to Cart', {controller: 'orders', action: 'add_to_cart', product: @product.id}, remote: true, method: :post, id: "cart-button", class: "btn btn-success", disabled: @product.quantity == 0 || current_user.nil?

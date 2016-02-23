@@ -8,7 +8,7 @@
       %th Price
       %th Subtotal
       %th Options
-    - @cart.order_items.each do |order_item|
+    - current_user.cart.order_items.each do |order_item|
       %tr
         %td= order_item.product.name
         %td= order_item.quantity
@@ -19,3 +19,4 @@
           %a.btn.btn-danger delete product
 
   = "Total: $#{@cart.total_price}"
+  = link_to 'Back', products_path, { class: "btn btn-primary" }
