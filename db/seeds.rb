@@ -39,9 +39,9 @@ Product.create({
 sample_user.orders.create(status: Order.statuses[:pending], checkout_time: nil)
 order = sample_user.orders.first
 prod1 = Product.first
-prod2 = Product.last
-order.order_items.create(product_id: prod1.id, quantity: prod1.quantity)
-order.order_items.create(product_id: prod2.id, quantity: prod2.quantity)
+prod2 = Product.second
+order.order_items.create(product_id: prod1.id, quantity: [1, prod1.quantity - 1].max)
+order.order_items.create(product_id: prod2.id, quantity: [1, prod2.quantity - 1].max)
 sample_user.orders.create(status: Order.statuses[:complete], checkout_time: Time.now)
 
 
