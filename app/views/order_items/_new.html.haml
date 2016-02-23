@@ -1,0 +1,6 @@
+%h3 @product.name
+= form_for [@product, @order_item], remote: true do |f|
+  = f.label :quantity
+  = f.number_field :quantity, step: 1
+
+  = f.submit

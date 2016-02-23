@@ -8,14 +8,16 @@
       %th Price
       %th Subtotal
       %th Options
-    %tr
-      %td test
-      %td 2
-      %td $1.00
-      %td $2.00
-      %td
-        %a product detail
-      %td
-        %a delete product
+    - @order.order_items.includes(:product).each do |order_item|
+      %tr
+        %td= order_item.product.name
+        %td= order_item.quantity
+        %td= order_item.product.price
+        %td= order_item.product.price * order_item.quantity
+        %td
+          %a product detail
+        %td
+          %a delete product
 
   = "Total: $#{2}"
+  = render 'order_items/new'
