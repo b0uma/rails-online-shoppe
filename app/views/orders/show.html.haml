@@ -1,0 +1,15 @@
+.container
+  %h1= "Order #{@order.id} detailed information"
+  %table.table.table-responsive.table-hover
+    %tr
+      %th Product
+      %th Quantity
+      %th Price
+      %th Subtotal
+    - @order.order_items.each do |order_item|
+      %tr
+        %td test
+        %td 2
+        %td $1.00
+        %td $2.00
+  %h1= "Total price: #{@order.total_price}"
