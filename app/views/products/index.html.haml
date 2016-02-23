@@ -1,6 +1,6 @@
 .container
   %h1 Listing products
-  %h1 This page should be styled to be more user friendly instead of a tabular format
+  %h1 This page should be styled to be more user friendly instead of a tabular format. The shared code between here and admin is unintentional
   = link_to 'Cart', '/cart', class: "btn btn-primary"
   = form_tag "/products", method: :get do
     = select_tag "category", options_from_collection_for_select(@categories, "id", "name", @selected_category.id)
