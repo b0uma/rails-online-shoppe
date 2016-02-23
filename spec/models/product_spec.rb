@@ -38,5 +38,8 @@ RSpec.describe Product, type: :model do
     it 'saves with valid data' do
       expect{valid.save}.to change{Product.count}.by(1)
     end
+    it 'can access associated categories' do
+      expect(valid).to respond_to(:categories)
+    end
   end
 end
