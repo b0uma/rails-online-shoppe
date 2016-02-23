@@ -42,5 +42,7 @@ prod1 = Product.first
 prod2 = Product.last
 order.order_items.create(product_id: prod1.id, quantity: prod1.quantity)
 order.order_items.create(product_id: prod2.id, quantity: prod2.quantity)
+sample_user.orders.create(status: Order.statuses[:complete], checkout_time: Time.now)
+
 
 
