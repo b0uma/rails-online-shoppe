@@ -10,4 +10,14 @@ class Order < ActiveRecord::Base
   def total_price
     order_items.map(&:cost).reduce(:+)
   end
+
+  def add_item(product_id)
+    item = order_items.find_by(product_id: product_id)
+    if item.nil?
+      order_items.create(product_id: product_id, quantity: 1)
+    else
+      item.quantity += 1
+      item.save
+    end
+  end
 end

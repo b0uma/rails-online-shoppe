@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_cart
 
   def add_to_cart
-    @cart.order_items.create(product_id: params[:product], quantity: 1)
+    @cart.add_item(params[:product])
     render 'cart', layout: false
   end
 

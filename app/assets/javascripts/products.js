@@ -4,5 +4,6 @@
 $(document).ready(function() {
   $('#cart-button').on("ajax:success", function(event, response) {
     $('.container').append(response);
+    $(this).attr("disabled", "disabled");
   });
 });
