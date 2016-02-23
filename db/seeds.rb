@@ -28,7 +28,7 @@ Category.create(name: 'Workout')
 end
 
 # out of stock item
-Product.create({"id"=>21,
+Product.create({
  "name"=>"Black Lotus",
  "price"=>999.0,
  "description"=>"very very rare, believe me",
@@ -36,7 +36,7 @@ Product.create({"id"=>21,
   "http://orig00.deviantart.net/58e2/f/2008/218/d/a/black_lotus_mtg_alter_proxy_by_michaelnoel.jpg",
  "quantity"=>0})
 
-sample_user.orders.create(status: Orders.statuses[:pending], checkout_time: nil)
+sample_user.orders.create(status: Order.statuses[:pending], checkout_time: nil)
 order = sample_user.orders.first
 prod1 = Product.first
 prod2 = Product.last
