@@ -1,0 +1,21 @@
+.container
+  %h1= "#{current_user.name} cart"
+
+  %table.table.table-responsive.table-hover
+    %tr
+      %th Product
+      %th Quantity
+      %th Price
+      %th Subtotal
+      %th Options
+    %tr
+      %td test
+      %td 2
+      %td $1.00
+      %td $2.00
+      %td
+        %a product detail
+      %td
+        %a delete product
+
+  = "Total: $#{2}"
