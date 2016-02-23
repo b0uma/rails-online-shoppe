@@ -3,6 +3,7 @@
   %li.list-group-item= "Name: #{@product.name}"
   %li.list-group-item= "Price: #{number_to_currency(@product.price)}"
   %li.list-group-item= "Description: #{@product.description}"
+  %li.list-group-item= "Quantity: #{@product.quantity}"
 
 %h3 Categories
 %ul.list-group
@@ -20,4 +21,4 @@
 - if current_user && current_user.admin
   = link_to 'Edit', edit_product_path(@product), { class: "btn btn-success" }
 = link_to 'Back', products_path, { class: "btn btn-primary" }
-= link_to 'Add to Cart', '#', { class: "btn btn-success", disabled: @product.quantity == 0 || current_user.nil?}
+= link_to 'Add to Cart', cart_path, remote: true, class: "btn btn-success", disabled: @product.quantity == 0 || current_user.nil?

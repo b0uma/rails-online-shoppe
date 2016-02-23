@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   post '/change_categories/:product_id', to: 'products#update_categories'
-  get '/carts', to: 'orders#cart'
+  get '/cart', to: 'orders#cart'
 end
