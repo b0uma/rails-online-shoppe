@@ -31,7 +31,7 @@ RSpec.describe ProductsController, type: :controller do
 
   context "for an admin user" do
 
-    let (:administrator) { User.create(name: 'lord', email: 'juicy', password: '666', admin: true) }
+    let (:administrator) { User.create(name: 'master', email: 'juicy', password: '123', admin: true) }
 
     before(:each) { session[:user_id] = administrator.id }
 
