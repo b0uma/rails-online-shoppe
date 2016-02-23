@@ -8,6 +8,6 @@ class Order < ActiveRecord::Base
   validates :status, presence: true
 
   def total_price
-    order_items.includes(:product).map(&:cost).reduce(:+)
+    order_items.map(&:cost).reduce(:+)
   end
 end
