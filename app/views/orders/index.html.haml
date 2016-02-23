@@ -1,0 +1,16 @@
+.container
+  %h1 Listing orders
+  %table.table.table-bordered.table-striped.table-hover
+    %thead
+      %tr
+        %th Order ID
+        %th Status
+        %th Total
+        %th Checkout Time
+    %tbody
+      - @orders.each do |order|
+        %tr
+          %td= link_to order.id, order_path(order)
+          %td= order.status
+          %td= number_to_currency(order.total_price)
+          %td= order.checkout_time
