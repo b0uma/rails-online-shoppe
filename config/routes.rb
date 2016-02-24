@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+
   root 'products#index'
   resources :products
 
@@ -13,9 +15,11 @@ Rails.application.routes.draw do
   post '/change_categories/:product_id', to: 'products#update_categories'
 
   get '/cart', to: 'orders#cart'
-  post '/cart', to: 'orders#add_to_cart'
 
   get '/orders', to: 'orders#index'
   post '/orders/:id', to: 'orders#checkout'
   get '/orders/:id', to: 'orders#show'
+
+  post '/cart', to: 'order_items#create', as: :cart_create
+  delete 'order_items/:id', to: 'order_items#destroy', as: :cart_delete
 end
