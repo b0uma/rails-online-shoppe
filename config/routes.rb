@@ -17,5 +17,5 @@ Rails.application.routes.draw do
 
   get '/orders', to: 'orders#index'
   post '/orders/:id', to: 'orders#checkout'
-  get '/orders/:id', to 'orders#show'
+  get '/orders/:id', to: 'orders#show'
 end
