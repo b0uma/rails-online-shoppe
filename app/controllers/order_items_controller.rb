@@ -1,10 +1,19 @@
 class OrderItemsController < ApplicationController
+  before_action :set_cart
+
   def create
     @cart.add_item(params[:product])
-    render 'cart', layout: false
+    render 'orders/cart', layout: false
   end
 
-  def delete
+  def destroy
+    item = OrderItem.find(params[:id])
+    if current_user != item.order.user
+      flash[:danger] = "invalid operation"
+    else
+      item.destroy
+    end
+    redirect_to "/cart"
   end
 
   private

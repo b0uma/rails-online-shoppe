@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get '/cart', to: 'orders#cart'
 
   get '/orders', to: 'orders#index'
-  post '/orders/:id', to: 'orders#checkout'
+  post '/orders', to: 'orders#checkout'
   get '/orders/:id', to: 'orders#show'
 
   post '/cart', to: 'order_items#create', as: :cart_create
