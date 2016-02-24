@@ -1,11 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_cart
 
-  def add_to_cart
-    @cart.add_item(params[:product])
-    render 'cart', layout: false
-  end
-
   def cart
   end
 
@@ -20,7 +15,9 @@ class OrdersController < ApplicationController
       redirect_to '/cart'
     else
       @order_to_close.status = Order.statuses[:complete]
+      @order_to_close.checkout_time = Time.now
       @order_to_close.save
+      current_user.orders.create(status: Order.statuses[:pending])
       render 'checkout'
     end
   end

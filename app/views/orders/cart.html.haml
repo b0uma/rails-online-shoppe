@@ -15,8 +15,8 @@
         %td= number_to_currency(order_item.product.price)
         %td= number_to_currency(order_item.product.price * order_item.quantity)
         %td
-          %a.btn.btn-primary product detail
-          %a.btn.btn-danger delete product
+          %a.btn.btn-danger= link_to 'Delete item', order_items_path(order_item), method: :delete
 
-  = "Total: #{number_to_currency(@cart.total_price)}"
+  %div
+    = "Total: #{number_to_currency(@cart.total_price)}"
   = link_to 'Back', products_path, { class: "btn btn-primary" }
