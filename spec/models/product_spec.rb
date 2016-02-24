@@ -28,7 +28,7 @@ RSpec.describe Product, type: :model do
       end
       it "the price is negative" do
         negative_price.save
-        expect(negative_price.errors[:price]).to include("must be greater than 0")
+        expect(negative_price.errors[:price]).to include("must be greater than -1")
       end
       it "the quantity is negative" do
         negative_quantity.save
