@@ -16,7 +16,7 @@ class Order < ActiveRecord::Base
     if item.nil?
       order_items.create(product_id: product_id, quantity: 1)
     else
-      item.quantity += 1
+      item.quantity += 1 unless item.quantity >= item.product.quantity
       item.save
     end
   end
