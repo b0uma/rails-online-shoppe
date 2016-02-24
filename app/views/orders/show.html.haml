@@ -8,8 +8,9 @@
       %th Subtotal
     - @order.order_items.each do |order_item|
       %tr
-        %td test
-        %td 2
-        %td $1.00
-        %td $2.00
-  %h1= "Total price: #{@order.total_price}"
+        %td= link_to order_item.product.name, product_path(order_item.product)
+        %td= order_item.quantity
+        %td= order_item.product.price
+        %td= number_to_currency(order_item.product.price * order_item.quantity)
+  %h1= "Total price: #{number_to_currency(@order.total_price)}"
+  = link_to 'Back', orders_path, { class: "btn btn-primary" }
