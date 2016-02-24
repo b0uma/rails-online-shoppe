@@ -20,3 +20,4 @@
   %div
     = "Total: #{number_to_currency(@cart.total_price)}"
   = link_to 'Back', products_path, { class: "btn btn-primary" }
+  = link_to 'Checkout!', orders_path, method: :post, class: "btn btn-primary"

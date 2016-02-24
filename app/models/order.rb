@@ -21,4 +21,12 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def deduct_product_quantities
+    order_items.includes(:product).each do |item|
+      product = item.product
+      product.quantity -= item.quantity
+      product.save
+    end
+  end
+
 end
