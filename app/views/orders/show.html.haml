@@ -1,16 +1,15 @@
-.container
-  %h1= "Order #{@order.id} detailed information"
-  %table.table.table-responsive.table-hover
+%h1= "Order #{@order.id} detailed information"
+%table.table.table-responsive.table-hover
+  %tr
+    %th Product
+    %th Quantity
+    %th Price
+    %th Subtotal
+  - @order.order_items.each do |order_item|
     %tr
-      %th Product
-      %th Quantity
-      %th Price
-      %th Subtotal
-    - @order.order_items.each do |order_item|
-      %tr
-        %td= link_to order_item.product.name, product_path(order_item.product)
-        %td= order_item.quantity
-        %td= order_item.product.price
-        %td= number_to_currency(order_item.product.price * order_item.quantity)
-  %h1= "Total price: #{number_to_currency(@order.total_price)}"
-  = link_to 'Back', orders_path, { class: "btn btn-primary" }
+      %td= link_to order_item.product.name, product_path(order_item.product)
+      %td= order_item.quantity
+      %td= order_item.product.price
+      %td= number_to_currency(order_item.product.price * order_item.quantity)
+%h1= "Total price: #{number_to_currency(@order.total_price)}"
+= link_to 'Back', orders_path, { class: "btn btn-primary" }

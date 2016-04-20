@@ -1,23 +1,19 @@
-.container
-  %h1 Listing products
-  %h1 This page should be styled to be more user friendly instead of a tabular format. The shared code between here and admin is unintentional
-  = link_to 'Cart', '/cart', class: "btn btn-primary"
-  = link_to 'Orders', '/orders', class: "btn btn-primary"
-  = form_tag "/products", method: :get do
-    = select_tag "category", options_from_collection_for_select(@categories, "id", "name", @selected_category.id)
-    = submit_tag "Filter by category"
-    = submit_tag "Reset"
-  %table.table.table-bordered.table-striped.table-hover
-    %thead
+%h1 Items for sale!
+= form_tag "/products", method: :get do
+  = select_tag "category", options_from_collection_for_select(@categories, "id", "name", @selected_category.id)
+  = submit_tag "Filter by category"
+  = submit_tag "Reset"
+%table.table.table-bordered.table-striped.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Price
+      %th Description
+  %tbody
+    - @products.each do |product|
       %tr
-        %th Name
-        %th Price
-        %th Description
-    %tbody
-      - @products.each do |product|
-        %tr
-          %td= link_to product.name, product_path(product)
-          %td= number_to_currency(product.price)
-          %td= product.description
+        %td= link_to product.name, product_path(product)
+        %td= number_to_currency(product.price)
+        %td= product.description
 
 

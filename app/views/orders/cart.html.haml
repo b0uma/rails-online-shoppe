@@ -1,23 +1,21 @@
-.container
-  %h1= "#{current_user.name} cart"
+%h1= "#{current_user.name} cart"
 
-  %table.table.table-responsive.table-hover
+%table.table.table-responsive.table-hover
+  %tr
+    %th Product
+    %th Quantity
+    %th Price
+    %th Subtotal
+    %th Options
+  - current_user.cart.order_items.each do |order_item|
     %tr
-      %th Product
-      %th Quantity
-      %th Price
-      %th Subtotal
-      %th Options
-    - current_user.cart.order_items.each do |order_item|
-      %tr
-        %td= order_item.product.name
-        %td= order_item.quantity
-        %td= number_to_currency(order_item.product.price)
-        %td= number_to_currency(order_item.product.price * order_item.quantity)
-        %td
-          = link_to 'Delete item', cart_delete_path(order_item), method: :delete, class: "btn btn-danger"
+      %td= order_item.product.name
+      %td= order_item.quantity
+      %td= number_to_currency(order_item.product.price)
+      %td= number_to_currency(order_item.product.price * order_item.quantity)
+      %td
+        = link_to 'Delete item', cart_delete_path(order_item), method: :delete, class: "btn btn-danger"
 
-  %div
-    = "Total: #{number_to_currency(@cart.total_price)}"
-  = link_to 'Back', products_path, { class: "btn btn-primary" }
-  = link_to 'Checkout!', orders_path, method: :post, class: "btn btn-primary"
+%div
+  = "Total: #{number_to_currency(@cart.total_price)}"
+= link_to 'Checkout!', orders_path, method: :post, class: "btn btn-success"

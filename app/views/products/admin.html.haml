@@ -1,24 +1,23 @@
-.container
-  %h1 Listing products
-  = link_to 'New Product', new_product_path, { class: "btn btn-success" }
-  = link_to 'Cart', '/cart', class: "btn btn-primary"
-  = form_tag "/admin", method: :get do
-    = select_tag "category", options_from_collection_for_select(@categories, "id", "name", @selected_category.try(:id))
-    = submit_tag "Filter by category"
-    = submit_tag "Reset"
-  %table.table.table-bordered.table-striped.table-hover
-    %thead
+%h1 Listing products
+= link_to 'New Product', new_product_path, { class: "btn btn-success" }
+= link_to 'Cart', '/cart', class: "btn btn-primary"
+= form_tag "/admin", method: :get do
+  = select_tag "category", options_from_collection_for_select(@categories, "id", "name", @selected_category.try(:id))
+  = submit_tag "Filter by category"
+  = submit_tag "Reset"
+%table.table.table-bordered.table-striped.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Price
+      %th Description
+      %th Options
+  %tbody
+    - @products.each do |product|
       %tr
-        %th Name
-        %th Price
-        %th Description
-        %th Options
-    %tbody
-      - @products.each do |product|
-        %tr
-          %td= link_to product.name, product_path(product)
-          %td= number_to_currency(product.price)
-          %td= product.description
-          %td
-            = link_to 'Edit', edit_product_path(product), { class: "btn btn-success" }
-            = link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' },  class: "btn btn-danger"
+        %td= link_to product.name, product_path(product)
+        %td= number_to_currency(product.price)
+        %td= product.description
+        %td
+          = link_to 'Edit', edit_product_path(product), { class: "btn btn-success" }
+          = link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' },  class: "btn btn-danger"
