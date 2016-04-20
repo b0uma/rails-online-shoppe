@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   has_many :orders, dependent: :destroy
 
-  after_create :create_initial_order
+  after_commit :create_initial_order
 
   def cart
     orders.includes(order_items: [:product]).find_by(status: Order.statuses[:pending])
