@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :set_cart
+  before_action :authenticate
+  before_action :set_cart, only: [:cart, :checkout]
 
   def cart
   end
