@@ -3,7 +3,9 @@
   %li.list-group-item= "Name: #{@product.name}"
   %li.list-group-item= "Price: #{number_to_currency(@product.price)}"
   %li.list-group-item= "Description: #{@product.description}"
-  %li.list-group-item= "Quantity: #{@product.quantity}"
+  %li.list-group-item
+    Quantity:
+    %span#product-quantity= @product.quantity
 
 %h3 Categories
 %ul.list-group
