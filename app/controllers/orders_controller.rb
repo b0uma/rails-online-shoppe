@@ -13,6 +13,9 @@ class OrdersController < ApplicationController
     if @cart.nil?
       flash[:danger] = 'Order not found'
       redirect_to '/cart'
+    elsif @cart.order_items.blank?
+      flash[:danger] = "You don't have anything in the cart."
+      redirect_to '/cart'
     else
       @cart.status = Order.statuses[:complete]
       @cart.checkout_time = Time.now
