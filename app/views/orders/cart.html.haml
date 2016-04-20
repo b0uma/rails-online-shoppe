@@ -1,21 +1,22 @@
-%h1= "#{current_user.name} cart"
+#cart
+  %h1= "#{current_user.name} cart"
 
-%table.table.table-responsive.table-hover
-  %tr
-    %th Product
-    %th Quantity
-    %th Price
-    %th Subtotal
-    %th Options
-  - current_user.cart.order_items.each do |order_item|
+  %table.table.table-responsive.table-hover
     %tr
-      %td= order_item.product.name
-      %td= order_item.quantity
-      %td= number_to_currency(order_item.product.price)
-      %td= number_to_currency(order_item.product.price * order_item.quantity)
-      %td
-        = link_to 'Delete item', cart_delete_path(order_item), method: :delete, class: "btn btn-danger"
+      %th Product
+      %th Quantity
+      %th Price
+      %th Subtotal
+      %th Options
+    - current_user.cart.order_items.each do |order_item|
+      %tr
+        %td{ id: "name-#{order_item.product.id}" }= order_item.product.name
+        %td{ id: "quantity-#{order_item.product.id}" }= order_item.quantity
+        %td{ id: "price-#{order_item.product.id}" }= number_to_currency(order_item.product.price)
+        %td{ id: "subtotal-#{order_item.product.id}" }= number_to_currency(order_item.product.price * order_item.quantity)
+        %td
+          = link_to 'Delete item', cart_delete_path(order_item), method: :delete, class: "btn btn-danger"
 
-%div
-  = "Total: #{number_to_currency(@cart.total_price)}"
-= link_to 'Checkout!', orders_path, method: :post, class: "btn btn-success"
+  %div#total_price
+    = "Total: #{number_to_currency(@cart.total_price)}"
+  = link_to 'Checkout!', orders_path, method: :post, class: "btn btn-success"
