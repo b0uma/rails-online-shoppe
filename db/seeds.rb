@@ -9,6 +9,8 @@ Product.destroy_all
 Category.destroy_all
 Order.destroy_all
 
+User.create(name: 'test_user', email: 'test@test.com', password: 'secret')
+
 sample_user = User.first
 
 Category.create(name: 'Food')
@@ -36,13 +38,15 @@ Product.create({
   "http://orig00.deviantart.net/58e2/f/2008/218/d/a/black_lotus_mtg_alter_proxy_by_michaelnoel.jpg",
  "quantity"=>0})
 
-sample_user.orders.create(status: Order.statuses[:pending], checkout_time: nil)
-order = sample_user.orders.first
+# create a cart, add 2 items, checkout the cart to save the order, then create a new cart
+order = sample_user.orders.find_by(status: Order.statuses[:pending])
 prod1 = Product.first
 prod2 = Product.second
 order.order_items.create(product_id: prod1.id, quantity: [1, prod1.quantity - 1].max)
 order.order_items.create(product_id: prod2.id, quantity: [1, prod2.quantity - 1].max)
-sample_user.orders.create(status: Order.statuses[:complete], checkout_time: Time.now)
+order.deduct_product_quantities
+order.update(status: Order.statuses[:complete], checkout_time: Time.now)
+sample_user.orders.create(status: Order.statuses[:pending])
 
 
 
