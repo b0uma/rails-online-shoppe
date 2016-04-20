@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       login(user)
       redirect_to '/products'
     else
-      flash.now[:errors] = 'Email or password was incorrect'
+      flash.now[:danger] = 'Email or password was incorrect'
       render :new
     end
   end
