@@ -11,6 +11,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 
 gem 'bcrypt'
+gem 'faker'
 
 group :development, :test do
   gem 'pry-rails'
@@ -19,7 +20,6 @@ group :development, :test do
   gem 'better_errors'
   gem 'rspec-rails'
   gem 'database_cleaner'
-  gem 'faker'
 end
 
 group :test do
