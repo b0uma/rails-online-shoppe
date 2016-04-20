@@ -8,4 +8,7 @@
   %fieldset.form-group
     = f.label :password
     = f.password_field :password, class: "form-control"
+  %fieldset.form-group
+    = f.label :password_confirm
+    = f.password_field :password_confirm, class: "form-control"
   = f.submit 'Save'
