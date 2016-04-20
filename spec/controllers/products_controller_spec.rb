@@ -22,6 +22,8 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "GET #show" do
+    let (:user) { User.create(name: 'person', email: 'juicy', password: '123') }
+    before(:each) { session[:user_id] = user.id }
     it "assigns the requested product as @product" do
       product = Product.create!(valid_attributes)
       get :show, {:id => product.to_param}

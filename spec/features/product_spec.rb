@@ -7,7 +7,7 @@ describe "Product", js: true do
   context 'a user' do
     it 'can see the page title' do
       visit root_path
-      expect(page).to have_content("Listing products")
+      expect(page).to have_content("Items for sale!")
     end
 
     describe "product creation" do
