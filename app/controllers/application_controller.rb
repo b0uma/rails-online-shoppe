@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
   def authorize
     render file: 'public/401.html', status: :unauthorized unless current_user && current_user.admin
   end
+
+  def authenticate
+    redirect_to login_path unless current_user
+  end
 end
