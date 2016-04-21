@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @cart = current_user.cart
+    @cart = current_user.cart if current_user
     @categories = Category.all
   end
 
