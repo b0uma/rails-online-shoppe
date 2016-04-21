@@ -13,6 +13,8 @@ gem 'haml-rails'
 gem 'bcrypt'
 gem 'faker'
 
+gem 'rails_12factor'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
